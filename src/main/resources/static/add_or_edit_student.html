@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html ng-app="app" ng-controller="AddOrEditStudentController">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+
+<h2>Add or edit student</h2>
+<form name="addStudentForm" novalidate ng-submit="createOrUpdateStudent()">
+    <input hidden type="text" ng-model="studentForm.id">
+    Name:
+    <input id="npName" type="text" ng-model="studentForm.name">
+    Mark:
+    <input id="npMark" type="number" ng-model="studentForm.mark">
+    <button type="submit">submit</button>
+</form>
+</body>
+</html>
