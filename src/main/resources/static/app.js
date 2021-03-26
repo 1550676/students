@@ -9,7 +9,7 @@ app.config(function($routeProvider) {
                     })
                     .when('/add_or_edit_student', {
                         templateUrl: 'add_or_edit_student.html',
-                        controller: 'AddOrEditProductController'
+                        controller: 'AddOrEditStudentController'
                     })
 });
 
@@ -29,10 +29,9 @@ app.controller('StudentsController', function ($scope, $http) {
                     fillTable();
                 });
         };
-
 });
 
-app.controller('AddOrEditProductController', function ($scope, $http, $routeParams) {
+app.controller('AddOrEditStudentController', function ($scope, $http, $routeParams) {
 
     if ($routeParams.id != null) {
         $http.get(contextPath + '/' + $routeParams.id).then(function (response) {
@@ -41,18 +40,17 @@ app.controller('AddOrEditProductController', function ($scope, $http, $routePara
         });
     }
 
-    $scope.createOrUpdateProduct = function() {
-
-        if($scope.productFromForm.id == null) {
-            $http.post(contextPath + '/api/v1/products', $scope.productFromForm).then(function (response) {
+    $scope.createOrUpdateStudent = function() {
+        if($scope.studentForm.id == null) {
+            $http.post(contextPath, $scope.studentForm).then(function (response) {
                 console.log(response);
-                window.location.href = contextPath + '/index.html#/shop';
+                window.location.href = 'http://localhost:8087/index.html#!/students';
                 window.location.reload(true);
             });
         } else {
-            $http.put(contextPath + '/api/v1/products', $scope.productFromForm).then(function (response) {
+            $http.put(contextPath, $scope.studentForm).then(function (response) {
                 console.log(response);
-                window.location.href = contextPath + '/index.html#/shop';
+                window.location.href = 'http://localhost:8087/index.html#!/students';
                 window.location.reload(true);
             });
         }

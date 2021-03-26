@@ -40,4 +40,8 @@ public class StudentService {
     public void deleteById(Long id) {
         studentRepository.deleteById(id);
     }
+
+    public Student saveOrUpdate(Student student) {
+        return studentRepository.save(student);
+    }
 }

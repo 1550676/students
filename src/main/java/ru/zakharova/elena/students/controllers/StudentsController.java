@@ -2,6 +2,8 @@ package ru.zakharova.elena.students.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.students.model.Student;
@@ -27,44 +29,29 @@ public class StudentsController {
 //        return productsService.findAll();
 //    }
 //
-//    @GetMapping(value = "/{id}", produces = "application/json")
-//    @ApiOperation("Returns one product by id")
-////    @ApiImplicitParams(value = {
-////            @ApiImplicitParam(name = "demo", type = "String", required = false, paramType = "query")
-////    })
-//    public ResponseEntity<?> getOneProduct(@PathVariable @ApiParam("Id of the product to be requested. Cannot be empty") Long id) {
-//        if (!productsService.existsById(id)) {
-//            throw new ProductNotFoundException("Product not found, id: " + id);
-//        }
-//        return new ResponseEntity<>(productsService.findById(id), HttpStatus.OK);
-//    }
-//
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public Student getOneProduct(@PathVariable Long id) {
+       return studentService.getById(id).get();
+    }
+
+
 
 
     @DeleteMapping("/{id}")
     public void deleteOneProducts(@PathVariable Long id) {
         studentService.deleteById(id);
     }
-//
-//    @PostMapping(consumes = "application/json", produces = "application/json")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @ApiOperation("Creates a new product")
-//    public Product saveNewProduct(@RequestBody Product product) {
-//        if (product.getId() != null) {
-//            product.setId(null);
-//        }
-//        return productsService.saveOrUpdate(product);
-//    }
-//
-//    @PutMapping(consumes = "application/json", produces = "application/json")
-//    @ApiOperation("Modifies an existing product")
-//    public ResponseEntity<?> modifyProduct(@RequestBody Product product) {
-//        if (product.getId() == null || !productsService.existsById(product.getId())) {
-//            throw new ProductNotFoundException("Product not found, id: " + product.getId());
-//        }
-//        if (product.getPrice().doubleValue() < 0.0) {
-//            return new ResponseEntity<>("Product's price can not be negative", HttpStatus.BAD_REQUEST);
-//        }
-//        return new ResponseEntity<>(productsService.saveOrUpdate(product), HttpStatus.OK);
-//    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public Student saveNewStudent(@RequestBody Student student) {
+        if (student.getId() != null) {
+            student.setId(null);
+        }
+        return studentService.saveOrUpdate(student);
+    }
+
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public Student modifyStudent(@RequestBody Student student) {
+        return studentService.saveOrUpdate(student);
+    }
 }
