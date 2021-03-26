@@ -18,24 +18,16 @@ import java.util.List;
 public class StudentsController {
     private StudentService studentService;
 
-
     @GetMapping(produces = "application/json")
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
 
-//    @GetMapping(produces = "application/json")
-//    public List<Product> getAllProducts() {
-//        return productsService.findAll();
-//    }
-//
+
     @GetMapping(value = "/{id}", produces = "application/json")
     public Student getOneProduct(@PathVariable Long id) {
        return studentService.getById(id).get();
     }
-
-
-
 
     @DeleteMapping("/{id}")
     public void deleteOneProducts(@PathVariable Long id) {
