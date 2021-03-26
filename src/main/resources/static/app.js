@@ -23,32 +23,38 @@ app.controller('StudentsController', function ($scope, $http) {
     };
     fillTable();
 
+    $scope.deleteStudent = function (id) {
+            $http.delete(contextPath + '/'+ id)
+                .then(function () {
+                    fillTable();
+                });
+        };
 
 });
 
-//app.controller('AddOrEditProductController', function ($scope, $http, $routeParams) {
-//
-//    if ($routeParams.id != null) {
-//        $http.get(contextPath + '/' + $routeParams.id).then(function (response) {
-//            $scope.studentForm = response.data;
-//            console.log($scope.studentForm);
-//        });
-//    }
-//
-//    $scope.createOrUpdateProduct = function() {
-//
-//        if($scope.productFromForm.id == null) {
-//            $http.post(contextPath + '/api/v1/products', $scope.productFromForm).then(function (response) {
-//                console.log(response);
-//                window.location.href = contextPath + '/index.html#/shop';
-//                window.location.reload(true);
-//            });
-//        } else {
-//            $http.put(contextPath + '/api/v1/products', $scope.productFromForm).then(function (response) {
-//                console.log(response);
-//                window.location.href = contextPath + '/index.html#/shop';
-//                window.location.reload(true);
-//            });
-//        }
-//    };
-//});
+app.controller('AddOrEditProductController', function ($scope, $http, $routeParams) {
+
+    if ($routeParams.id != null) {
+        $http.get(contextPath + '/' + $routeParams.id).then(function (response) {
+            $scope.studentForm = response.data;
+            console.log($scope.studentForm);
+        });
+    }
+
+    $scope.createOrUpdateProduct = function() {
+
+        if($scope.productFromForm.id == null) {
+            $http.post(contextPath + '/api/v1/products', $scope.productFromForm).then(function (response) {
+                console.log(response);
+                window.location.href = contextPath + '/index.html#/shop';
+                window.location.reload(true);
+            });
+        } else {
+            $http.put(contextPath + '/api/v1/products', $scope.productFromForm).then(function (response) {
+                console.log(response);
+                window.location.href = contextPath + '/index.html#/shop';
+                window.location.reload(true);
+            });
+        }
+    };
+});
